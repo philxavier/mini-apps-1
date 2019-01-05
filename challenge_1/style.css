@@ -1,0 +1,23 @@
+
+
+table, th, td {
+    border: 1px solid black;
+  }
+
+.col {
+    padding:30px;
+}
+
+
+h3 {
+    display: inline;
+}
+
+
+#scoreOfO {
+    display: inline;
+}
+
+#scoreOfX {
+    display: inline
+}

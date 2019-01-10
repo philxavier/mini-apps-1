@@ -10,15 +10,15 @@
 </head>
 <body>
     <h1>JSON to CSV</h1>
-    <form method="post" action= "/" class="mainForm" id="myform" enctype="multipart/form-data">
+    <form id = 'form'> 
         <div class="form-example">
-            <label for="name">Select the file</label>
+            <label for="name">Insert the JSON</label>
             <div>
-                <input type="file" id="filePick" name="file"accept=".doc, .txt">
+                <textarea id = inputBox></textarea> 
             </div>
         </div>
         <div class="form-example">
-            <button id="form_button" type="submit">Submit</button>
+            <button id="form_button" type="button">Submit</button>
         </div>
     </form>
     <div id="results"></div>

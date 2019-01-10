@@ -5,6 +5,7 @@ var path = require('path');
 var fs = require('fs');
 var multer  = require('multer')
 const fileUpload = require('express-fileupload');
+var manipulate_data = require('./manipulate_data')
 
 
 
@@ -30,9 +31,9 @@ app.post('/', function (req, res) {
     var messageObj = req.files.file.data.toString()
    
     var messageObj =  JSON.parse(messageObj);
-    var columns = getColumns(messageObj);
-    var data = getData(messageObj);
-    var result = buildAnswer(columns, data); 
+    var columns = manipulate_data.getColumns(messageObj);
+    var data = manipulate_data.getData(messageObj);
+    var result = manipulate_data.buildAnswer(columns, data); 
     console.log('results here=====================', result)
     res.send(`<!DOCTYPE html>
         <html lang="en">
@@ -67,52 +68,3 @@ app.post('/', function (req, res) {
 });
 
 /////////////////////////////functions
-function getColumns(obj) {
-    var container = [];
-    for (key in obj) {
-        if (key !== 'children')
-        container.push(key);
-    }
-    return container;
-}
-
-function getData(messageObj) {
-    var container = [];
-    
-    function recurGetData(obj) {
-
-        if (!obj.children) {
-            return;
-        }
-
-        var hold = [];
-        for (var key in obj) {
-            if (key !== 'children') {
-                hold.push(obj[key])
-            }
-        }
-        container.push(hold);
-
-        if (obj.children) {
-            for (let i = 0; i < obj.children.length; i++) {
-                recurGetData(obj.children[i]);
-            }
-        }
-    }
-
-    recurGetData(messageObj);
-    return container;          
-};
-
-function buildAnswer(col, row) {
-    var result = ''
-    result += col.join(',') + '\n';
-    
-    for (let i = 0; i < row.length; i++) {
-        var currentRow = `<div>${row[i].join(',')}</div>`
-        result += currentRow;
-    }
-
-    return result;
-
-}

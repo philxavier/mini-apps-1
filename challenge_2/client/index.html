@@ -10,17 +10,19 @@
 </head>
 <body>
     <h1>JSON to CSV</h1>
-    <form method="post" action= "/" class="mainForm" id="myform">
+    <form method="post" action= "/" class="mainForm" id="myform" enctype="multipart/form-data">
         <div class="form-example">
-            <label for="name">Enter the  JSON: </label>
-            <textarea name="Text1" cols="40" rows="5" id='inputBox'></textarea>
+            <label for="name">Select the file</label>
+            <div>
+                <input type="file" id="filePick" name="file"accept=".doc, .txt">
+            </div>
         </div>
         <div class="form-example">
             <button id="form_button" type="submit">Submit</button>
         </div>
     </form>
     <div id="results"></div>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
 </body>

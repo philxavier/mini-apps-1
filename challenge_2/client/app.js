@@ -5,6 +5,9 @@ $( document ).ready(function() {
 
     var text = button.addEventListener("click", () => {  
 
+
+       var test =  $('#myForm').datafile;
+       console.log(test);
         // var http = new XMLHttpRequest();
         // var y = 'json'
         // var z = document.getElementById("inputBox").value;

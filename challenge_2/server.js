@@ -28,13 +28,20 @@ app.get('/', function(req, res) {
 
 app.post('/', function (req, res) {
 
-    console.log('req body here==========', req.body)
     var messageObj = JSON.parse(req.body.data);
     var columns = manipulate_data.getColumns(messageObj);
     var data = manipulate_data.getData(messageObj);
     var result = manipulate_data.buildAnswer(columns, data); 
-    console.log('results here=====================', result)
+    var result2 = manipulate_data.buildAnswer2(columns, data);
+
+    fs.writeFile('message.txt', result2, (err) => {
+        if (err) throw err;
+        console.log('The file has been saved!');
+    });
     res.send(result);
 
 });
 
+app.get('/download', function(req, res){
+    res.download(path.join(__dirname, 'message.txt'));
+})

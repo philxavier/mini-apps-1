@@ -50,6 +50,19 @@ function buildAnswer(col, row) {
 
 }
 
+function buildAnswer2 (col, row) {
+    var result = ''
+    result += col.join(',') + '\n';
+    
+    for (let i = 0; i < row.length; i++) {
+        var currentRow = row[i].join(',') + '\n';
+        result += currentRow;
+    }
+
+    return result;
+}
+
 exports.getColumns = getColumns;
 exports.getData = getData;
 exports.buildAnswer = buildAnswer;
+exports.buildAnswer2 = buildAnswer2

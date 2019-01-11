@@ -7,7 +7,6 @@ $(document).ready(function () {
     button.addEventListener("click", (e) => {
         e.preventDefault;
         var input = document.getElementById('inputBox').value;
-
     
         $.post("/", {data:input}, function(result){
             var text = result;
@@ -15,8 +14,23 @@ $(document).ready(function () {
             paragraphResult.innerHTML = text;
             console.log(paragraphResult);
             $('#results').append(paragraphResult);
+            console.log('here')
         });
+    
+    });
+
+    $('#downloadLink').on('click', function(){
+        $.ajax(
+            {
+                method: 'get', 
+                url: '/download',
+                success: function() {
+                    console.log('yes')
+                }
+         })
+
     })
+
 
 });
 

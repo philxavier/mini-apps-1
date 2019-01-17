@@ -12,9 +12,7 @@ $(document).ready(function () {
             var text = result;
             var paragraphResult = document.createElement("p");
             paragraphResult.innerHTML = text;
-            console.log(paragraphResult);
             $('#results').append(paragraphResult);
-            console.log('here')
         });
     
     });

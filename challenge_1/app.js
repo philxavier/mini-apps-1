@@ -4,6 +4,10 @@ var controlAddSymbol = 0;
 var controlFillData = 0; 
 var xWins = 0;
 var oWins = 0;
+var playerX = prompt('Insert name of player one')
+var playerO = prompt('Insert name of player two')
+
+
 
 var gameData = [[0,0,0],
                 [0,0,0], 
@@ -45,6 +49,13 @@ var addSymbol = function(lastWinner, ele) {
     
 }
 
+var insertNames = function() {
+    var divPlayerOne = document.getElementById('div_player_one');
+    var divPlayerTwo = document.getElementById('div_player_two');
+    divPlayerOne.prepend(playerX);
+    divPlayerTwo.prepend(playerO);
+}
+
 
 var updateScore = function() {
     var xScore = document.getElementById('scoreOfX');
@@ -53,7 +64,7 @@ var updateScore = function() {
     oScore.innerHTML = oWins;
 }
 
-
+insertNames();
 updateScore();
 
 //=====grab which quadrant is clicked========= 

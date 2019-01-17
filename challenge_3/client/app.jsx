@@ -93,21 +93,55 @@ class F3 extends React.Component {
 				</div>
 				<br></br>
 				<div >
-					<input type="submit" value="Purchase"></input>
+					<input type="submit" value="Next"></input>
 				</div>                
 			</form>
 		</div>)
 	}
 };
 
-class Confirmation extends React.Component { 
+class ConfirmationItem extends React.Component {
+
+	constructor(props) {
+		super(props)
+	}
+
+	render () {
+		return (
+			<li>{this.props.info[0] + ': ' + this.props.info[1]}</li>
+		)
+	}
+}
+
+class PurchaseButton extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 
 	render() {
-		return(
+		return <button onClick = {(e) => {this.props.goToNextForm(e)}}>Purchase</button>
+	}
+}
+
+
+class ConfirmationList extends React.Component {
+	
+	constructor(props) {
+		super(props)
+	}
+
+	render () {
+		return (
 			<div>
-				<h2>{this.props.infos[1]}</h2>
+				<ul>
+					{this.props.infos.map((info, ind) =>
+					<ConfirmationItem key = {ind} info={info} />
+					)}
+    			</ul>
+				<PurchaseButton goToNextForm = {this.props.goToNextForm} />
 			</div>
 		)
+		
 	}
 }
 
@@ -135,6 +169,8 @@ class App extends React.Component {
 		e.preventDefault()
 
 		if (this.state.step1 === true) {
+
+			this.infos = [];
 
 			var form = document.getElementById('form1').elements 
 
@@ -184,9 +220,32 @@ class App extends React.Component {
 				.then((result) => {
 
 					var infos = result.data[0];
-
 					for (var key in infos) {
-						this.infos.push(infos[key]);
+						if (key === 'C_PASSWORD' || key === 'ID') {
+							continue;
+						} else {
+							if (key === 'C_NAME') {
+								this.infos.push(['Name', infos[key]]);
+							} else if ( key === 'C_EMAIL') {
+								this.infos.push(['E-Mail', infos[key]]);
+							} else if ( key === 'C_ADDRESS') {
+								this.infos.push(['Address', infos[key]]);
+							} else if ( key === 'C_CITY') {
+								this.infos.push(['City', infos[key]]);
+							} else if ( key === 'C_STATE') {
+								this.infos.push(['State', infos[key]]);
+							} else if ( key === 'C_ZIPCODE') {
+								this.infos.push(['Zip Code', infos[key]]);
+							} else if ( key === 'C_CREDITCARD') {
+								this.infos.push(['Credit Card Number', infos[key]]);
+							} else if ( key === 'C_EXPIRY_DATE') {
+								this.infos.push(['Expiration Date', infos[key]]);
+							} else if ( key === 'C_CVV') {
+								this.infos.push(['CVV', infos[key]]);
+							} else if ( key === 'C_BILLINGZIP') {
+								this.infos.push(['Billing Zip Code', infos[key]]);
+							} 
+						}
 					}
 
 					this.setState({
@@ -195,6 +254,11 @@ class App extends React.Component {
 					})
 				})
 			})			
+		} else {
+			this.setState({
+				step1: true,
+				step4: false
+			})
 		}			
 	}
 
@@ -204,7 +268,7 @@ class App extends React.Component {
 				{this.state.step1 ? <F1 goToNextForm = {this.goToNextForm}/> : null}
 				{this.state.step2 ? <F2 goToNextForm = {this.goToNextForm}/> : null}
 				{this.state.step3 ? <F3 goToNextForm = {this.goToNextForm}/> : null}
-				{this.state.step4 ? <Confirmation infos = {this.infos}/>: null}
+				{this.state.step4 ? <ConfirmationList infos = {this.infos} goToNextForm = {this.goToNextForm}/>: null}
 			</div>
 		)
 	}

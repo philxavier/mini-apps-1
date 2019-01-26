@@ -1,0 +1,140 @@
+// create a function that creates a click listener and handler for the table
+
+//check column depth or what is the lowest 0;
+
+
+class Square extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {X: false, O: false}
+        this.togglePiece = this.togglePiece.bind(this);
+        this.clickHandler2 = this.clickHandler2.bind(this);
+    }
+
+    clickHandler2(e) {
+        e.preventDefault()
+        var square = e.target;
+        var coordx = square.getAttribute("data-x");
+        var coordy = square.getAttribute("data-Y");
+        this.togglePiece(parseInt(coordx));
+    }
+
+    togglePiece(col) {
+       var squares = document.getElementsByClassName('cell');
+       console.log(squares);
+       var hold = [];
+
+       for (let i = 0; i <squares.length; i++) {
+           console.log(squares[i]);
+           if (squares[i].dataset.x === col.toString()) {
+              hold.push(squares[i])
+           }
+       }
+       debugger
+       for (let i = hold.length - 1; i >= 0; i--) {
+        if (!hold[i].innerHTML) {
+            hold[i].innerHTML = 'X';
+            break
+        }
+       }
+       //grab those cells with same x
+        // for (let i = 0; i < this.board.length ; i++) {
+        //     if (this.board[i][col] !== 0) {
+        //         var position = [i - 1, col];
+        //         break
+        //     } else {
+        //         if (i === this.board.length -1) {
+        //             var position = [i, col];
+        //             break
+        //         }
+        //     }
+        // }
+
+        // var intRow = position[0];
+        // var intCol = position[1];
+        
+        // this.board[intRow][intCol] = 1;
+        
+        // var squares = document.getElementsByClassName("cell");
+        // for (let i = 0; i <squares.length; i++) {
+        //    var element = squares[i]
+
+        //    var XInfo = parseInt(element.getAttribute('data-x'));
+        //    var YInfo = parseInt(element.getAttribute('data-y'));
+
+        //    if (intRow === YInfo && intCol === XInfo) {
+        //         element.innerHTML = 'X'
+        //    }
+        // }
+        
+    }
+
+
+    render () {
+        return (
+            <div className="cell" data-x={this.props.valueOfX} data-y={this.props.valueOfY} onClick={(e) => {this.clickHandler2(e)}}></div>
+        )
+    }
+}
+========================================================
+
+//grab those cells with same x
+        // for (let i = 0; i < this.board.length ; i++) {
+        //     if (this.board[i][col] !== 0) {
+        //         var position = [i - 1, col];
+        //         break
+        //     } else {
+        //         if (i === this.board.length -1) {
+        //             var position = [i, col];
+        //             break
+        //         }
+        //     }
+        // }
+
+        // var intRow = position[0];
+        // var intCol = position[1];
+        
+        // this.board[intRow][intCol] = 1;
+        
+        // var squares = document.getElementsByClassName("cell");
+        // for (let i = 0; i <squares.length; i++) {
+        //    var element = squares[i]
+
+        //    var XInfo = parseInt(element.getAttribute('data-x'));
+        //    var YInfo = parseInt(element.getAttribute('data-y'));
+
+        //    if (intRow === YInfo && intCol === XInfo) {
+        //         element.innerHTML = 'X'
+        //    }
+        // }
+        ===============================================================
+
+         clickHandler2(e) {
+        e.preventDefault()
+        var square = e.target;
+        var coordx = square.getAttribute("data-x");
+        var coordy = square.getAttribute("data-Y");
+        this.togglePiece(parseInt(coordx));
+    }
+
+    togglePiece(col) {
+       var squares = document.getElementsByClassName('cell');
+       console.log(squares);
+       var hold = [];
+
+       for (let i = 0; i <squares.length; i++) {
+           console.log(squares[i]);
+           if (squares[i].dataset.x === col.toString()) {
+              hold.push(squares[i])
+           }
+       }
+       debugger
+       for (let i = hold.length - 1; i >= 0; i--) {
+        if (!hold[i].innerHTML) {
+            hold[i].innerHTML = 'X';
+            break
+        }
+       }
+       
+    }

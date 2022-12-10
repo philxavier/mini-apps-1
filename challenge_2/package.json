@@ -4,7 +4,7 @@
   "description": "csv mini app",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-fileupload": "^1.1.1-alpha.1",
     "formidable": "^1.2.1",
     "jsdom": "^13.1.0",
